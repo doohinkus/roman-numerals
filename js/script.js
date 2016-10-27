@@ -97,7 +97,7 @@ var checkInteger = function (number){
 //   }
 //   return result;
 // }
-var romanNumeralValues = {"1":"I", "5":"V", "10":"X", "50":"L", "100":"C", "500":"D", "1000":"M"};
+// var romanNumeralValues = {"1":"I", "5":"V", "10":"X", "50":"L", "100":"C", "500":"D", "1000":"M"};
 var result = "";
 function onesPlace(number) {
   var value = parseInt(number);
@@ -107,8 +107,22 @@ function onesPlace(number) {
     {
       result += romanNumeralValues[0];
     }
+  } else if (value === 4) {
+    result += romanNumeralValues[0] + romanNumeralValues[1];
+  } else if(value === 5) {
+    result += romanNumeralValues[1];
+  } else if(value > 5 && value < 9) {
+    result += romanNumeralValues[1];
+    for (i = 0; i < value % 5; i++) {
+      result += romanNumeralValues[0];
+    }
+  } else if(value === 9) {
+    result += romanNumeralValues[0] + romanNumeralValues[2];
+  } else {
+    result += romanNumeralValues[2];
   }
-}
+  return result;
+};
 
 $(document).ready(function(){
   $("form").submit(function(event){
@@ -116,7 +130,7 @@ $(document).ready(function(){
     var userInput = $("#arabicNumerals").val();
     if(checkInteger(userInput)) {
 
-      result = sizeOfNumber(userInput);
+      result = onesPlace(userInput);
       console.log(result);
       $("#romanNumerals").text(result);
       result = "";
