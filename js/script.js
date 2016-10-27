@@ -98,11 +98,12 @@ var checkInteger = function (number){
 //   return result;
 // }
 // var romanNumeralValues = {"1":"I", "5":"V", "10":"X", "50":"L", "100":"C", "500":"D", "1000":"M"};
-var result = "";
+// var result = "";
 function onesPlace(number) {
+  var result = "";
   var value = parseInt(number);
   var romanNumeralValues = ["I","V","X"];
-  if(value < 4){
+  if(value >= 1 && value < 4){
     for (i = 0; i < value; i++)
     {
       result += romanNumeralValues[0];
@@ -118,19 +119,140 @@ function onesPlace(number) {
     }
   } else if(value === 9) {
     result += romanNumeralValues[0] + romanNumeralValues[2];
+  } else if(value === 0) {
+    result = "";
+  }
+
+  return result;
+};
+
+function tensPlace(number) {
+  var result = "";
+  var value = parseInt(number);
+  var romanNumeralValues = ["X","L","C"];
+  console.log("value: ", value);
+
+  if(value >= 1 && value < 4) {
+    for (i = 0; i < value; i++)
+    {
+      result += romanNumeralValues[0];
+    }
+  } else if (value === 4) {
+    result += romanNumeralValues[0] + romanNumeralValues[1];
+  } else if(value === 5) {
+    result += romanNumeralValues[1];
+  } else if(value > 5 && value < 9) {
+    result += romanNumeralValues[1];
+    for (i = 0; i < value % 5; i++) {
+      result += romanNumeralValues[0];
+    }
+  } else if(value === 9) {
+    result += romanNumeralValues[0] + romanNumeralValues[2];
+  } else if(value === 0) {
+    result = "";
   } else {
     result += romanNumeralValues[2];
   }
   return result;
 };
 
+function hundredsPlace(number) {
+  var result = "";
+  var value = parseInt(number);
+  var romanNumeralValues = ["C","D","M"];
+  if(value >= 1 && value < 4){
+    for (i = 0; i < value; i++)
+    {
+      result += romanNumeralValues[0];
+    }
+  } else if (value === 4) {
+    result += romanNumeralValues[0] + romanNumeralValues[1];
+  } else if(value === 5) {
+    result += romanNumeralValues[1];
+  } else if(value > 5 && value < 9) {
+    result += romanNumeralValues[1];
+    for (i = 0; i < value % 5; i++) {
+      result += romanNumeralValues[0];
+    }
+  } else if(value === 9) {
+    result += romanNumeralValues[0] + romanNumeralValues[2];
+  } else if(value === 0) {
+    result = "";
+  } else {
+      result += romanNumeralValues[2];
+  }
+  return result;
+};
+function thousandsPlace(number) {
+  var result = "";
+  var value = parseInt(number);
+  var romanNumeralValues = ["M","-","-"];
+  if(value === 0){
+    result += romanNumeralValues[0];
+  } else if(value >= 1 && value < 4){
+    for (i = 0; i < value; i++)
+    {
+      result += romanNumeralValues[0];
+    }
+  } else if (value === 4) {
+    result += romanNumeralValues[0] + romanNumeralValues[1];
+  } else if(value === 5) {
+    result += romanNumeralValues[1];
+  } else if(value > 5 && value < 9) {
+    result += romanNumeralValues[1];
+    for (i = 0; i < value % 5; i++) {
+      result += romanNumeralValues[0];
+    }
+  } else if(value === 9) {
+    result += romanNumeralValues[0] + romanNumeralValues[2];
+  }
+  return result;
+};
+
+function getRomanNumerals(number) {
+  var result = "";
+  var ones = "";
+  var tens = "";
+  var hundreds = "";
+  var thousands = "";
+  var resultArray = [];
+  var places = number.split("");
+
+  resultArray = places.reverse();
+  console.log("resultArray: ", resultArray);
+
+  ones = onesPlace(resultArray[0]);
+  tens = tensPlace(resultArray[1]);
+  hundreds = hundredsPlace(places[2]);
+  thousands = thousandsPlace(places[3]);
+  result =  thousands + hundreds + tens + ones;
+  console.log("tens ones: ", tens, " ", ones);
+
+
+  // ones = onesPlace(places[places.length - 1]);
+  // tens = tensPlace(places[places.length - 2]);
+  // hundreds = hundredsPlace(places[places.length - 3]);
+  // thousands = thousandsPlace(places[places.length - 4]);
+
+
+
+  // result = thousands + hundreds + tens + ones;
+    result = thousands + hundreds + tens + ones;
+
+    // console.log(places.length);
+    // console.log(resultArray);
+    // result = resultArray[resultArray.length + 1 - places.length];
+  return result;
+}
+
 $(document).ready(function(){
   $("form").submit(function(event){
+    var result = "";
     event.preventDefault();
     var userInput = $("#arabicNumerals").val();
     if(checkInteger(userInput)) {
 
-      result = onesPlace(userInput);
+      result = getRomanNumerals(userInput);
       console.log(result);
       $("#romanNumerals").text(result);
       result = "";
