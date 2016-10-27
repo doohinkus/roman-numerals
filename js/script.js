@@ -76,13 +76,35 @@ function resolveTens (number){
   return result;
 };
 
+function sizeOfNumber (number) {
+  var value = parseInt(number);
+  var result = "";
+
+  if (value > 900) {
+    result = resolveFiveThousands(value.toString());
+  } else if (value > 400) {
+    result = resolveThousands(value.toString());
+  } else if (value > 90) {
+    result = resolveHundreds(value.toString());
+  } else if (value > 40) {
+    result = resolveFiftys(value.toString());
+  } else if (value > 9) {
+    result = resolveTens(value.toString());
+  } else if (value > 4) {
+    result = resolveFives(value.toString());
+  } else {
+    result = resolveOnes(value.toString());
+  }
+  return result;
+}
+
 $(document).ready(function(){
   $("form").submit(function(event){
     event.preventDefault();
     var userInput = $("#arabicNumerals").val();
     var romanNumeralValues = {"1":"I", "5":"V", "10":"X", "50":"L", "100":"C", "500":"D", "1000":"M"};
     if(checkInteger(userInput)) {
-      result = resolveTens(userInput);
+      result = sizeOfNumber(userInput);
       console.log(result);
       $("#romanNumerals").text(result);
       result = "";
