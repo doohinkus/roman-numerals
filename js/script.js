@@ -131,27 +131,28 @@ function tensPlace(number) {
   var value = parseInt(number);
   var romanNumeralValues = ["X","L","C"];
   console.log("value: ", value);
-
-  if(value >= 1 && value < 4) {
-    for (i = 0; i < value; i++)
-    {
-      result += romanNumeralValues[0];
+  if(number != undefined){
+    if(value >= 1 && value < 4) {
+      for (i = 0; i < value; i++)
+      {
+        result += romanNumeralValues[0];
+      }
+    } else if (value === 4) {
+      result += romanNumeralValues[0] + romanNumeralValues[1];
+    } else if(value === 5) {
+      result += romanNumeralValues[1];
+    } else if(value > 5 && value < 9) {
+      result += romanNumeralValues[1];
+      for (i = 0; i < value % 5; i++) {
+        result += romanNumeralValues[0];
+      }
+    } else if(value === 9) {
+      result += romanNumeralValues[0] + romanNumeralValues[2];
+    } else if(value === 0) {
+      result = "";
+    } else {
+      result += romanNumeralValues[2];
     }
-  } else if (value === 4) {
-    result += romanNumeralValues[0] + romanNumeralValues[1];
-  } else if(value === 5) {
-    result += romanNumeralValues[1];
-  } else if(value > 5 && value < 9) {
-    result += romanNumeralValues[1];
-    for (i = 0; i < value % 5; i++) {
-      result += romanNumeralValues[0];
-    }
-  } else if(value === 9) {
-    result += romanNumeralValues[0] + romanNumeralValues[2];
-  } else if(value === 0) {
-    result = "";
-  } else {
-    result += romanNumeralValues[2];
   }
   return result;
 };
@@ -159,27 +160,30 @@ function tensPlace(number) {
 function hundredsPlace(number) {
   var result = "";
   var value = parseInt(number);
+  console.log("number ",number);
   var romanNumeralValues = ["C","D","M"];
-  if(value >= 1 && value < 4){
-    for (i = 0; i < value; i++)
-    {
-      result += romanNumeralValues[0];
+  if(number != undefined){
+    if(value >= 1 && value < 4){
+      for (i = 0; i < value; i++)
+      {
+        result += romanNumeralValues[0];
+      }
+    } else if (value === 4) {
+      result += romanNumeralValues[0] + romanNumeralValues[1];
+    } else if(value === 5) {
+      result += romanNumeralValues[1];
+    } else if(value > 5 && value < 9) {
+      result += romanNumeralValues[1];
+      for (i = 0; i < value % 5; i++) {
+        result += romanNumeralValues[0];
+      }
+    } else if(value === 9) {
+      result += romanNumeralValues[0] + romanNumeralValues[2];
+    } else if(value === 0) {
+      result = "";
+    } else {
+        result += romanNumeralValues[2];
     }
-  } else if (value === 4) {
-    result += romanNumeralValues[0] + romanNumeralValues[1];
-  } else if(value === 5) {
-    result += romanNumeralValues[1];
-  } else if(value > 5 && value < 9) {
-    result += romanNumeralValues[1];
-    for (i = 0; i < value % 5; i++) {
-      result += romanNumeralValues[0];
-    }
-  } else if(value === 9) {
-    result += romanNumeralValues[0] + romanNumeralValues[2];
-  } else if(value === 0) {
-    result = "";
-  } else {
-      result += romanNumeralValues[2];
   }
   return result;
 };
@@ -187,9 +191,7 @@ function thousandsPlace(number) {
   var result = "";
   var value = parseInt(number);
   var romanNumeralValues = ["M","-","-"];
-  if(value === 0){
-    result += romanNumeralValues[0];
-  } else if(value >= 1 && value < 4){
+  if(value >= 1 && value < 4){
     for (i = 0; i < value; i++)
     {
       result += romanNumeralValues[0];
