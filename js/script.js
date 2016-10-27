@@ -44,8 +44,14 @@ function resolveFives (number){
 
 function resolveTens (number){
   var value = parseInt(number);
-  var index = parseInt(value / 10);
+  var index = parseInt(value/10);
+  alert(index);
 
+  if(value < 4){
+    resolveOnes(value.toString());
+  } else if(value < 9){
+    resolveFives(value.toString());
+  }
   for(i = 0; i < index; i++) {
     if (value % 10 === 0) {
       value -= 10;
@@ -55,7 +61,7 @@ function resolveTens (number){
     }else{
       result += "X";
       value -= 10;
-      if(value < 3){
+      if(value < 4){
         resolveOnes(value.toString());
       } else if(value < 9){
         resolveFives(value.toString());
