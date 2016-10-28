@@ -15,8 +15,8 @@ var checkInteger = function (number){
 
 var convertNumber = function (number, array) {
   var result = "";
+  // debugger;
   var value = parseInt(number);
-
   if(value >= 1 && value < 4){
     for (i = 0; i < value; i++)
     {
@@ -45,17 +45,14 @@ function getRomanNumerals(number) {
   var result ="";
 
   var places = number.split("");
+
   resultArray = places.reverse();
+    console.log (places)
 
-  // ones = convertNumber(resultArray[0], onesArray);
-  // tens = convertNumber(resultArray[1], tensArray);
-  // hundreds = convertNumber(places[2], hundredsArray);
-  // thousands = convertNumber(places[3], thousandsArray);
-  //
-  // return thousands + hundreds + tens + ones;
 
-  for (var i =0; i< places.length-1; i++){
-    result += convertNumber(resultArray[i], decimalPlaces[i]);
+  for (var i =places.length; i>=0 ; i--){
+    console.log(decimalPlaces[i], " i" , i);
+    result += convertNumber(places[i], decimalPlaces[i]);
 
   }
   return result;
