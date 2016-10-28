@@ -15,8 +15,8 @@ var checkInteger = function (number){
 
 var convertNumber = function (number, array) {
   var result = "";
+  // debugger;
   var value = parseInt(number);
-
   if(value >= 1 && value < 4){
     for (i = 0; i < value; i++)
     {
@@ -41,20 +41,21 @@ var convertNumber = function (number, array) {
 };
 
 function getRomanNumerals(number) {
-  var onesArray = ["I", "V", "X"];
-  var tensArray = ["X", "L", "C"];
-  var hundredsArray = ["C", "D", "M"];
-  var thousandsArray = ["M", "", ""];
+  var decimalPlaces = [["I", "V", "X"], ["X", "L", "C"], ["C", "D", "M"], ["M", "", ""]];
+  var result ="";
 
   var places = number.split("");
-  resultArray = places.reverse();
-  
-  ones = convertNumber(resultArray[0], onesArray);
-  tens = convertNumber(resultArray[1], tensArray);
-  hundreds = convertNumber(places[2], hundredsArray);
-  thousands = convertNumber(places[3], thousandsArray);
 
-  return thousands + hundreds + tens + ones;
+  resultArray = places.reverse();
+    console.log (places)
+
+
+  for (var i =places.length; i>=0 ; i--){
+    console.log(decimalPlaces[i], " i" , i);
+    result += convertNumber(places[i], decimalPlaces[i]);
+
+  }
+  return result;
 }
 
 $(document).ready(function(){
