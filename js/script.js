@@ -45,16 +45,16 @@ function getRomanNumerals(number) {
   var tensArray = ["X", "L", "C"];
   var hundredsArray = ["C", "D", "M"];
   var thousandsArray = ["M", "", ""];
+  var result ="";
 
   var places = number.split("");
   resultArray = places.reverse();
-  
-  ones = convertNumber(resultArray[0], onesArray);
-  tens = convertNumber(resultArray[1], tensArray);
-  hundreds = convertNumber(places[2], hundredsArray);
-  thousands = convertNumber(places[3], thousandsArray);
 
-  return thousands + hundreds + tens + ones;
+  for (var i =0; i< places.length; i++){
+    result += convertNumber(resultArray[i], onesArray);
+    console.log(convertNumber(resultArray[i], onesArray))
+  }
+  return result;
 }
 
 $(document).ready(function(){
