@@ -41,18 +41,22 @@ var convertNumber = function (number, array) {
 };
 
 function getRomanNumerals(number) {
-  var onesArray = ["I", "V", "X"];
-  var tensArray = ["X", "L", "C"];
-  var hundredsArray = ["C", "D", "M"];
-  var thousandsArray = ["M", "", ""];
+  var decimalPlaces = [["I", "V", "X"], ["X", "L", "C"], ["C", "D", "M"], ["M", "", ""]];
   var result ="";
 
   var places = number.split("");
   resultArray = places.reverse();
 
-  for (var i =0; i< places.length; i++){
-    result += convertNumber(resultArray[i], onesArray);
-    console.log(convertNumber(resultArray[i], onesArray))
+  // ones = convertNumber(resultArray[0], onesArray);
+  // tens = convertNumber(resultArray[1], tensArray);
+  // hundreds = convertNumber(places[2], hundredsArray);
+  // thousands = convertNumber(places[3], thousandsArray);
+  //
+  // return thousands + hundreds + tens + ones;
+
+  for (var i =0; i< places.length-1; i++){
+    result += convertNumber(resultArray[i], decimalPlaces[i]);
+
   }
   return result;
 }
